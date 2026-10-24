@@ -1,0 +1,17 @@
+# Secrets — never commit real env files. Keep ONLY .env.example (the template).
+.env
+.env.*
+!.env.example
+
+# macOS
+.DS_Store
+
+# Python / uv
+.venv/
+__pycache__/
+*.pyc
+
+# Build artifacts
+dist/
+build/
+*.egg-info/

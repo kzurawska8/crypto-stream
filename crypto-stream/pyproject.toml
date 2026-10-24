@@ -1,0 +1,21 @@
+[project]
+name = "crypto-stream"
+version = "0.1.0"
+description = "Crypto market-data producer: CoinGecko -> Kafka / Azure Event Hubs"
+authors = [
+    { name = "kzurawska8", email = "karolina.zurawska88@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "azure-identity>=1.26.0",
+    "azure-keyvault-secrets>=4.11.3",
+    "kafka-python>=3.0.11",
+    "requests>=2.34.2",
+]
+
+[project.scripts]
+crypto-stream = "crypto_stream:main"
+
+[build-system]
+requires = ["uv_build>=0.13.5,<0.14.0"]
+build-backend = "uv_build"
