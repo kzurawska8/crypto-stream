@@ -1,5 +1,7 @@
 # Crypto Stream — real-time cryptocurrency data pipeline
 
+[![CI](https://github.com/kzurawska8/crypto-stream/actions/workflows/ci.yml/badge.svg)](https://github.com/kzurawska8/crypto-stream/actions/workflows/ci.yml)
+
 An end-to-end **streaming data engineering** project: it ingests live crypto market
 data from a public API, streams it through Kafka / Azure Event Hubs, and processes it
 with Apache Spark on Databricks into a Delta Lake lakehouse - with credentials managed
@@ -27,6 +29,24 @@ in Azure Key Vault.
       ▼
  Delta Lake:  crypto.prices_bronze   +   crypto.prices_5min
 ```
+
+## Demo
+
+**Producer streaming into Azure Event Hubs (secret pulled from Key Vault):**
+
+![Producer](docs/images/producer.png)
+
+### Data landing in Azure Event Hubs
+
+| Namespace overview | Incoming-message metrics |
+| --- | --- |
+| ![Event Hubs overview](docs/images/eventhubs-overview.png) | ![Event Hubs metrics](docs/images/eventhubs-metrics.png) |
+
+### Processed into Delta tables on Databricks
+
+| Notebook output (5-min aggregates) | Delta tables in the catalog |
+| --- | --- |
+| ![Databricks notebook](docs/images/databricks-notebook.png) | ![Databricks catalog](docs/images/databricks-catalog.png) |
 
 ## Tech stack & skills demonstrated
 
