@@ -13,11 +13,12 @@ jobs:
 
       - name: Set up uv
         uses: astral-sh/setup-uv@v6
-        with:
-          enable-cache: true
 
-      - name: Install dependencies
-        run: uv sync
+      - name: Install Python 3.14
+        run: uv python install 3.14
+
+      - name: Install dependencies (from the committed lock)
+        run: uv sync --frozen
 
       - name: Lint (ruff)
         run: uv run ruff check .
