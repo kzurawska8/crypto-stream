@@ -56,15 +56,13 @@ class KafkaSink:
         from kafka import KafkaProducer  # lazy import: only needed for SINK=kafka
 
         self.topic = topic
-        kwargs = dict(
-            bootstrap_servers=[s.strip() for s in bootstrap_servers.split(",")],
-            key_serializer=lambda k: k.encode("utf-8") if k is not None else None,
-            value_serializer=lambda v: json.dumps(v, separators=(",", ":")).encode(
-                "utf-8"
-            ),
-            acks="all",  # wait for the broker to persist before considering it sent
-            retries=3,
-        )
+        kwargs = {
+            "bootstrap_servers": [s.strip() for s in bootstrap_servers.split(",")],
+            "key_serializer": lambda k: k.encode("utf-8") if k is not None else None,
+            "value_serializer": lambda v: json.dumps(v, separators=(",", ":")).encode("utf-8"),
+            "acks": "all",  # wait for the broker to persist before considering it sent
+            "retries": 3,
+        }
         # Local Kafka is PLAINTEXT; Azure Event Hubs needs SASL_SSL + PLAIN.
         if security_protocol != "PLAINTEXT":
             kwargs.update(

@@ -66,11 +66,9 @@ class Config:
     keyvault_secret_name: str
 
     @classmethod
-    def from_env(cls) -> "Config":
+    def from_env(cls) -> Config:
         return cls(
-            api_base_url=os.getenv(
-                "COINGECKO_API_URL", "https://api.coingecko.com/api/v3"
-            ),
+            api_base_url=os.getenv("COINGECKO_API_URL", "https://api.coingecko.com/api/v3"),
             vs_currency=os.getenv("VS_CURRENCY", "usd"),
             coins=_env_list("COINS", DEFAULT_COINS),
             poll_interval_seconds=float(os.getenv("POLL_INTERVAL_SECONDS", "15")),
@@ -79,9 +77,7 @@ class Config:
             run_once=_env_bool("RUN_ONCE", False),
             log_level=os.getenv("LOG_LEVEL", "INFO").upper(),
             sink=os.getenv("SINK", "stdout").lower(),
-            kafka_bootstrap_servers=os.getenv(
-                "KAFKA_BOOTSTRAP_SERVERS", "localhost:29092"
-            ),
+            kafka_bootstrap_servers=os.getenv("KAFKA_BOOTSTRAP_SERVERS", "localhost:29092"),
             kafka_topic=os.getenv("KAFKA_TOPIC", "crypto.prices"),
             kafka_security_protocol=os.getenv("KAFKA_SECURITY_PROTOCOL", "PLAINTEXT"),
             kafka_sasl_mechanism=os.getenv("KAFKA_SASL_MECHANISM", "PLAIN"),

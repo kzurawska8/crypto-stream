@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import uuid
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 SOURCE = "coingecko"
 
@@ -36,7 +36,7 @@ class CryptoPriceRecord:
 
 
 def _now_iso() -> str:
-    return datetime.now(timezone.utc).isoformat()
+    return datetime.now(UTC).isoformat()
 
 
 def to_record(raw: dict, vs_currency: str) -> CryptoPriceRecord:

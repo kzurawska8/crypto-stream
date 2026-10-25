@@ -68,18 +68,12 @@ class CoinGeckoClient:
                 # 429 = rate limited, 5xx = server side: both worth retrying.
                 if resp.status_code == 429 or resp.status_code >= 500:
                     last_error = CoinGeckoError(f"HTTP {resp.status_code}")
-                    log.warning(
-                        "retryable status %d (attempt %d)", resp.status_code, attempt
-                    )
+                    log.warning("retryable status %d (attempt %d)", resp.status_code, attempt)
                 else:
-                    raise CoinGeckoError(
-                        f"HTTP {resp.status_code}: {resp.text[:200]}"
-                    )
+                    raise CoinGeckoError(f"HTTP {resp.status_code}: {resp.text[:200]}")
 
             if attempt < self.max_retries:
                 backoff = 2 ** (attempt - 1)
                 time.sleep(backoff)
 
-        raise CoinGeckoError(
-            f"giving up after {self.max_retries} attempts: {last_error}"
-        )
+        raise CoinGeckoError(f"giving up after {self.max_retries} attempts: {last_error}")
